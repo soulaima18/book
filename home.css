@@ -1,0 +1,158 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    background-color: #F5F5DC;
+}
+header {
+    width: 100%; /* العرض كامل */
+    height: 100px; /* حجم الرأس */
+    background: #D4AF37;
+    position: fixed;
+    top: 0;
+    left: 0;
+    color: #fbf5f5;
+    display: flex;
+    justify-content: space-between; /* المسافة بين الصورة والقائمة */
+    align-items: center;
+    padding: 0 20px; /* التباعد بين العناصر من الجوانب */
+    z-index: 100;
+}
+
+header img{
+    width: 110px; /* حجم الصورة */
+    height:90px;
+   padding-right: 0px;
+   
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between; /* المسافات بين الروابط */
+    align-items: center;
+    gap: 20px; /* المسافة بين الروابط */
+}
+
+.nav a {
+    text-decoration: none;
+    color: #fbf5f5;
+    font-size: 16px;
+}
+
+.nav a:hover {
+    color: #C8A27C; /* تغيير اللون عند التمرير */
+}
+
+.features-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    text-align: center;
+    flex-wrap: wrap;
+    flex: 1 1 calc(33.33% - 20px); /* لجعل الصناديق تأخذ نفس العرض مع المسافات */
+    min-width: 250px; /* حد أدنى للعرض */
+  
+  }
+  
+  .feature-box {
+    width: 30%;
+    padding: 20px;
+    background-color:  #ffffff;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+    box-sizing: border-box;
+  
+    border:3px solid #D4AF37;
+  
+    transition: background-color 0.3s ease;
+  
+   
+   
+  }
+  
+  .feature-box:hover {
+    transform: scale(1.1); 
+    background-color:  #F5F5DC; /* بيج داكن أو رمادي */
+    box-shadow: 10px 4px 10px rgba(0, 0, 0,0.1);
+  
+  }
+
+ 
+/* تنسيق السلايدر */
+.slider {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    margin-top: 80px; /* لتجنب تغطية القائمة */
+}
+
+.slide {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.active {
+    opacity: 1;
+}
+i {
+    font-size: 50px important!;
+    color: #D4AF37 important!;
+    margin-bottom: 10px;
+    margin: 10px;
+}
+p {
+    font-size: 12px;
+    color: #696969;
+  
+}
+h1 {
+    font-size: 20px;
+    color: #000000;
+     margin: 30px;
+     padding: 20px;
+    text-align: center;
+}
+.icon {
+    font-size: 30px; /* تكبير الرمز */
+    color: gold; /* تغيير اللون */
+}
+svg {
+   
+    width: 100px; /* تعديل الحجم */
+    height: 50px;
+    color: #D4AF37;
+    stroke: #D4AF37;
+
+   
+}
+.cat{
+    display: flex;
+    align-items: center;
+    
+
+
+}
+
+
+button {
+    background-color: #efc640;
+    color: white;
+    padding: 10px ;
+    width: 100px;
+    height: 50px;
+    border: gold 3px solid;
+  
+
+   
+    border-radius: 5px;
+    font-size: 16px;
+}
+footer{
+    color:#D4AF37 ;
+}

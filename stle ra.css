@@ -1,0 +1,99 @@
+body{
+font-family:Cairo;
+margin-right: 0px ;
+padding: 0;
+height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+background: url(a4.png) center/cover no-repeat; /* صورة خلفية */
+color: #3E2C1C;
+}
+h1{
+  font-size: 45px;
+  text-align: center;
+  color: #000;
+  margin-top: 0%;
+  padding-top: 0%;
+}
+
+textarea {
+width: 90%;
+height: 350px;
+padding: 10px;
+font-size: 16px;
+background:rgb(255, 255, 255);
+margin-right: 25px;
+border-radius: 25px;
+border: 2px solid #D4AF37  ;
+}
+ button{
+  width: 300px;
+  height: 50px;
+  background: linear-gradient(to right, gold, #d4a017);
+  border: none;
+  border-radius: 25px;
+  font-size: 18px;
+  font-weight: bold;
+  color: black;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  display: block;
+  margin: 15px auto;
+  text-align: center;
+}
+
+/* تأثير عند التمرير */
+button:hover {
+  background: linear-gradient(to right, #d4a017, gold);
+  transform: scale(1.05);
+}
+
+button:hover {
+background-color: #A67C00;
+}
+#errorLog {
+color: rgb(245, 221, 246);
+}
+label {
+    font-size: 20px;
+    margin: 10px;
+    color:  #D4AF37  ;
+    margin-right: 30px;
+  /* Add your styles here */
+}
+
+
+input[type="file"] {
+  background: white;
+  border: 2px solid #D4AF37  ;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 90%;
+  margin-right: 25px;
+  
+
+}
+select {
+  width: 200px;
+  height: 40px;
+  border-radius: 10px;
+  border: 2px solid #D4AF37 ;
+  padding: 5px;
+  font-size: 16px;
+ 
+}
+.container {
+  width: 700px;
+  background:beige; 
+  border: solid #D4AF37 10px ;/* لون شفاف */
+  box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.315);
+  padding: 20px;
+  border-radius: 50px 1px;
+ 
+  margin: auto;
+  height: 650px;
+ 
+}
+

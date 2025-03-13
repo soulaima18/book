@@ -1,0 +1,140 @@
+<html leng="ar" dir="rtl">
+    <head>
+        <meta name="description" content="استمع إلى الكتب الصوتية باللغة الفرنسية بجودة عالية.">
+        <meta name="keywords" content="كتب صوتية, قراءة, استماع, فرنسي, موقع كتب">
+        <meta name="author" content="اسم موقعك">
+        <title>موقع الكتب الصوت _استمع لأفضل الكتب</title>
+        <title>Lire des livres voix haute
+        </title>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="stle ra.css">
+        <script src="https://code.responsivevoice.org/responsivevoice.js?key=Bvt1lQNu"></script>
+   
+
+    </head>
+    <body>
+        
+   
+    <div class="container">
+            
+        <h1>قراءة الكتاب بالصوت</h1>
+        <input type="file" id="fileInput" accept=".txt, .pdf">
+        <br><br>
+        <textarea id="textInput"  readonly ></textarea>
+        <br>
+        <button onclick="startReading()">ابدأ القراءة</button>
+        <br>
+        <label for="speed">سرعة القراءة:</label>
+        <select id="speed">
+            <option value="0.5">بطيء</option>
+            <option value="1.0" selected>عادي</option>
+            <option value="1.5">سريع</option>
+        </select>
+        <p id="errorLog"></p>
+        
+    </div>
+
+
+    
+        <script>
+            let lines = [];
+            let currentIndex = 0;
+            const LINES_PER_BATCH = 20; // يقرأ 20 سطر في كل مرة
+            esponsiveVoice.speak("النص الذي تريد قراءته", "Arabic Male", {rate: 1.0});
+            responsiveVoice.speak("هذه هي القراءة مع سرعة منخفضة", "Arabic Male", {rate: 0.5}); // سرعة بطيئة
+            responsiveVoice.speak("هذه هي القراءة مع سرعة طبيعية", "Arabic Male", {rate: 1.0}); // سرعة عادية
+            responsiveVoice.speak("هذه هي القراءة مع سرعة عالية", "Arabic Male", {rate: 1.5}); // سرعة سريعة
+    
+    
+            document.getElementById("fileInput").addEventListener("change", function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const fileType = file.name.split('.').pop().toLowerCase();
+                    if (fileType === "txt") {
+                        readTextFile(file);
+                    } else if (fileType === "pdf") {
+                        readPDFFile(file);
+                    } else {
+                        showError("⚠️ الملف غير مدعوم! الرجاء اختيار ملف TXT أو PDF.");
+                    }
+                }
+            });
+    
+            function readTextFile(file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    processText(e.target.result);
+                };
+                reader.readAsText(file);
+            }
+    
+            function readPDFFile(file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const typedArray = new Uint8Array(event.target.result);
+                    pdfjsLib.getDocument(typedArray).promise.then(pdf => {
+                        let text = "";
+                        let promises = [];
+                        for (let i = 1; i <= pdf.numPages; i++) {
+                            promises.push(
+                                pdf.getPage(i).then(page => {
+                                    return page.getTextContent().then(content => {
+                                        let pageText = content.items.map(item => item.str).join(" ").trim();
+                                        if (pageText.length > 0) {
+                                            text += pageText + "\n";
+                                        }
+                                    });
+                                })
+                            );
+                        }
+                        Promise.all(promises).then(() => processText(text));
+                    }).catch(() => showError("⚠️ خطأ في قراءة ملف PDF!"));
+                };
+                reader.readAsArrayBuffer(file);
+            }
+    
+            function processText(text) {
+                lines = text.split("\n").map(line => line.trim());
+                currentIndex = 0;
+                document.getElementById("textInput").value = "";
+                if (lines.length === 0) {
+                    showError("⚠️ لا يوجد نص للقراءة!");
+                } else {
+                    startReading();
+                }
+            }
+    
+            function startReading() {
+                if (currentIndex < lines.length) {
+                    const textBatch = lines.slice(currentIndex, currentIndex + LINES_PER_BATCH).join("\n");
+                    document.getElementById("textInput").value = textBatch;
+                    const speed = parseFloat(document.getElementById("speed").value);
+                    speakText(textBatch, speed, () => {
+                        currentIndex += LINES_PER_BATCH;
+                        setTimeout(startReading, 3000); // الانتقال تلقائيًا بعد انتهاء القراءة
+                    });
+                } else {
+                    alert("🎉 تمت قراءة الكتاب بالكامل!");
+                }
+            }
+    
+            function speakText(text, speed, callback) {
+                responsiveVoice.speak(text, "Arabic Male", {rate: speed});
+                callback();
+            }
+    
+            function showError(message) {
+                document.getElementById("errorLog").textContent = message;
+            }
+            
+    
+        </script>
+                        
+    </body>
+
+
+
+
+
+</html>

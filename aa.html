@@ -1,0 +1,137 @@
+<html dir="rtl" len="ar">
+    <head>
+        <meta name="description" content="استمع إلى الكتب الصوتية باللغة الفرنسية بجودة عالية.">
+        <meta name="keywords" content="كتب صوتية, قراءة, استماع, فرنسي, موقع كتب">
+        <meta name="author" content="اسم موقعك">
+        <title>موقع الكتب الصوتية | استمع لأفضل الكتب</title>
+        <title>Lire des livres voix haute
+        </title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="entre.css">
+        <script src="ee.js"></script>
+     
+   
+
+   
+
+    </script>
+    <body >
+        <main>
+           
+            <section class="x">
+                <div class="container" >
+                    <div class="login-box">
+                
+                       
+            
+                        <form action="login.php" method="post" id="login-form" >
+                          <div class="name-fields">
+                           <h1> تسجيل الدخول </h1> 
+                           
+                            <label for="login-email"> البريد الألكتوني أو أسم المستخدم </label>
+                            <input type="email" name="email"  id="login-email" placeholder=" أدخل البريد الألكتروني أو أسم المستخدم"><br>
+                        
+                            <label for="password">كلمة المرور </label>
+                            <input type="password" name="password" id="password" placeholder="أدخل كلمة المرور"><br>
+                            <input type="submit" value="تسجيل الدخول">
+                            <p id="login-error" class="error"></p>
+                            <a href="#" id="forgot-password">هل نسيت كلمة المرور</a> 
+                            <a href="entre.html">ليس لديا حساب حاليا </a>
+                             
+                            <button class="google-login" z>
+                                <img src="gg.png" alt="gougle"  width="40px" height="40px">
+                                <i class="fab fa-google"> التسجيل عبر جوجل</i>
+                            </button>
+                            
+                          </div>
+            
+                      
+                        </form>
+                    </div>
+                </div>
+
+            </section>
+
+
+
+        </main>
+        <script>
+        
+        function login() {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            var messageBox = document.getElementById("message");
+
+    // تحقق من صحة البريد وكلمة المرور
+            if (!email.includes("@") || !email.includes(".")) {
+                messageBox.style.color = "red";
+                messageBox.textContent = "البريد الإلكتروني غير صحيح!";
+                return;
+            }
+            if (password.length < 8) {
+                messageBox.style.color = "red";
+                messageBox.textContent = "كلمة المرور يجب أن تكون 8 أحرف على الأقل!";
+                return;
+            }
+
+    // إرسال البيانات إلى PHP للتحقق من المستخدم
+         var formData = new FormData();
+         formData.append("email", email);
+         formData.append("password", password);
+
+        fetch("login.php", {
+        method: "POST",
+        body: formData
+         })
+         .then(response => response.json())
+        .then(data => {
+            messageBox.style.color = data.status === "success" ? "green" : "red";
+            messageBox.textContent = data.message;
+         })
+        .catch(error => console.error("حدث خطأ:", error));
+        }
+
+      </script>  
+      <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+      
+        const firebaseConfig = {
+          apiKey: "YOUR_API_KEY",
+          authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+          projectId: "YOUR_PROJECT_ID",
+          storageBucket: "YOUR_PROJECT_ID.appspot.com",
+          messagingSenderId: "YOUR_SENDER_ID",
+          appId: "YOUR_APP_ID"
+        };
+      
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+      
+        document.getElementById("googleLogin").addEventListener("click", () => {
+          signInWithPopup(auth, provider)
+            .then((result) => {
+              const user = result.user;
+              document.getElementById("message").innerText = `تم تسجيل الدخول بنجاح! مرحبًا، ${user.displayName}`;
+              window.location.href = "home.html"; // توجيه المستخدم إلى الصفحة الرئيسية
+            })
+            .catch((error) => {
+              document.getElementById("message").innerText = "حدث خطأ أثناء تسجيل الدخول: " + error.message;
+            });
+        });
+      </script>
+          
+        
+
+
+
+    </body>
+
+
+
+
+
+</html>    
+                        <
